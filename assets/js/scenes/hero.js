@@ -11,14 +11,17 @@
       gsap.set(split.chars, { yPercent: 115 });
       gsap.set(".hero__planet", { xPercent: -50, yPercent: -22, x: 0, y: 0 });
       gsap.set(".planet, .planet__atmo", { yPercent: 35 });
-      gsap.set([".hero__eyebrow", ".hero__lead", ".hero__scroll", ".hero__countdown"], { autoAlpha: 0, y: 24 });
+      gsap.set([".hero__lead", ".hero__scroll", ".hero__countdown"], { autoAlpha: 0, y: 24 });
+      gsap.set(".hero__eyebrow .dot", { scale: 0 });
     },
 
     intro() {
       return gsap.timeline()
         .to(".planet, .planet__atmo", { yPercent: 0, duration: 2.2, ease: "gd.out" }, 0)
         .to(split.chars, { yPercent: 0, duration: 1.3, ease: "gd.out", stagger: 0.035 }, 0.1)
-        .to([".hero__eyebrow", ".hero__lead", ".hero__scroll", ".hero__countdown"], {
+        .fromTo(".hero__eyebrow", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "gd.inOut" }, 0.5)
+        .to(".hero__eyebrow .dot", { scale: 1, duration: 0.6, ease: "back.out(3)" }, 1.4)
+        .to([".hero__lead", ".hero__scroll", ".hero__countdown"], {
           autoAlpha: 1, y: 0, duration: 1, ease: "gd.out", stagger: 0.08,
         }, 0.7);
     },
@@ -42,7 +45,7 @@
         .fromTo(".hero__title",
           { scale: 1, filter: "blur(0px)", autoAlpha: 1 },
           { scale: 2.2, filter: "blur(14px)", autoAlpha: 0, ease: "power2.in" }, 0)
-        .fromTo(".hero__meta", { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -60, ease: "none", duration: 0.4 }, 0)
+        .fromTo(".hero__meta, .hero__eyebrow", { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -60, ease: "none", duration: 0.4 }, 0)
         .fromTo(".hero__planet",
           { yPercent: -22, scale: 1 },
           { yPercent: 25, scale: 0.6, ease: "power1.in" }, 0);

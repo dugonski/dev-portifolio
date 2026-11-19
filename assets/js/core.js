@@ -149,6 +149,12 @@ window.GD = window.GD || {};
       },
     });
 
+    ScrollTrigger.create({
+      trigger: ".marquee",
+      start: "top 85%",
+      onToggle: (self) => gsap.to(".hud", { autoAlpha: self.isActive ? 0 : 1, duration: 0.4 }),
+    });
+
     const links = GD.qa(".nav__links a");
     GD.qa("[data-section]").forEach((section) => {
       const spacer = section.parentElement.classList.contains("pin-spacer") ? section.parentElement : section;
