@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guilherme Dugonski — Desenvolvedor</title>
+  <meta name="description" content="Portfólio de Guilherme Dugonski, desenvolvedor em Curitiba. Uma viagem espacial guiada pela rolagem." />
+  <meta name="theme-color" content="#030712" />
+  <meta property="og:title" content="Guilherme Dugonski — Desenvolvedor" />
+  <meta property="og:description" content="Uma viagem espacial guiada pela rolagem." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='14' fill='%233b82f6'/%3E%3Cellipse cx='32' cy='32' rx='28' ry='8' fill='none' stroke='%2393c5fd' stroke-width='3' transform='rotate(-20 32 32)'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body>
+  <!-- ============ PRELOADER: contagem regressiva ============ -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__row">
+      <span>MISSÃO GD-01</span>
+      <span class="preloader__status">SISTEMAS ONLINE</span>
+    </div>
+    <div class="preloader__count"><span class="js-count">000</span><small>%</small></div>
+    <div class="preloader__row">
+      <span>T-MINUS</span>
+      <div class="preloader__bar"><span></span></div>
+      <span>IGNIÇÃO</span>
+    </div>
+  </div>
+
+  <!-- ============ CAMADAS FIXAS ============ -->
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__dot"></span>
+    <span class="cursor__ring"><span class="cursor__label"></span></span>
+  </div>
+
+  <header class="nav">
+    <a href="#launch" class="nav__logo" data-scroll-to aria-label="Início">
+      <span class="nav__logo-mark"></span>GD
+    </a>
+    <nav class="nav__links" aria-label="Seções">
+      <a href="#orbit" data-scroll-to data-scramble>Sobre</a>
+      <a href="#constellation" data-scroll-to data-scramble>Skills</a>
+      <a href="#missions" data-scroll-to data-scramble>Projetos</a>
+      <a href="#trajectory" data-scroll-to data-scramble>Jornada</a>
+      <a href="#contact" data-scroll-to data-scramble>Contato</a>
+    </nav>
+    <a class="nav__cta" href="https://github.com/dugonski" target="_blank" rel="noopener" data-magnetic>
+      <span>GitHub ↗</span>
+    </a>
+  </header>
+
+  <aside class="hud" aria-hidden="true">
+    <div class="hud__line"><span class="hud__key">SEÇÃO</span><span class="hud__val js-hud-section">01 — LANÇAMENTO</span></div>
+    <div class="hud__line"><span class="hud__key">DIST</span><span class="hud__val"><span class="js-hud-dist">000.000</span> / 384.400 KM</span></div>
+    <div class="hud__progress"><span class="js-hud-progress"></span></div>
+  </aside>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main>
+
+        <!-- ============ 01 · LANÇAMENTO (hero) ============ -->
+        <section class="hero" id="launch" data-section="01 — LANÇAMENTO">
+          <div class="hero__planet" aria-hidden="true">
+            <div class="planet">
+              <div class="planet__surface"></div>
+              <div class="planet__shade"></div>
+            </div>
+            <div class="planet__atmo"></div>
+          </div>
+
+          <div class="hero__inner">
+            <p class="hero__eyebrow mono">
+              <span class="dot"></span> 25.4284° S, 49.2733° W — Curitiba, BR
+            </p>
+            <h1 class="hero__title" aria-label="Guilherme Dugonski">
+              <span class="hero__line">Guilherme</span>
+              <span class="hero__line hero__line--outline">Dugonski</span>
+            </h1>
+            <div class="hero__meta">
+              <p class="hero__lead">Desenvolvedor criando experiências digitais<br />que desafiam a gravidade.</p>
+              <div class="hero__scroll mono">
+                <span>Role para decolar</span>
+                <span class="hero__scroll-line"><span></span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__countdown mono" aria-hidden="true">
+            <span>VEL</span><span class="js-velocity">0000</span><span>KM/H</span>
+          </div>
+        </section>
+
+        <!-- ============ 02 · ÓRBITA (sobre) ============ -->
+        <section class="orbit" id="orbit" data-section="02 — ÓRBITA">
+          <div class="orbit__system" aria-hidden="true">
+            <svg viewBox="0 0 800 800" class="orbit__svg">
+              <defs>
+                <radialGradient id="coreGrad" cx="40%" cy="35%" r="70%">
+                  <stop offset="0" stop-color="#bfdbfe" />
+                  <stop offset=".45" stop-color="#3b82f6" />
+                  <stop offset="1" stop-color="#0b1a4a" />
+                </radialGradient>
+              </defs>
+              <g class="orbit__rings">
+                <circle class="orbit__ring" cx="400" cy="400" r="150" />
+                <circle class="orbit__ring orbit__ring--dash" cx="400" cy="400" r="230" />
+                <ellipse class="orbit__ring" cx="400" cy="400" rx="360" ry="140" transform="rotate(-18 400 400)" />
+                <circle class="orbit__ring orbit__ring--faint" cx="400" cy="400" r="330" />
+              </g>
+              <circle class="orbit__core" cx="400" cy="400" r="70" fill="url(#coreGrad)" />
+              <g transform="rotate(-18 400 400)">
+                <path id="orbitPath" class="orbit__path" d="M760,400 A360,140 0 1,1 40,400 A360,140 0 1,1 760,400" />
+                <g class="orbit__satellite">
+                  <rect x="-14" y="-6" width="28" height="12" rx="2" fill="#93c5fd" />
+                  <rect x="-34" y="-4" width="16" height="8" fill="#1e3a8a" stroke="#93c5fd" stroke-width="1" />
+                  <rect x="18" y="-4" width="16" height="8" fill="#1e3a8a" stroke="#93c5fd" stroke-width="1" />
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <div class="orbit__content">
+            <p class="section-tag mono"><span>02</span> Órbita — Sobre mim</p>
+            <p class="orbit__text">
+              Sou Guilherme, desenvolvedor de 19 anos em Curitiba. Escrevo código como quem
+              traça rotas: com precisão, curiosidade e um pouco de ousadia. Transformo ideias em
+              interfaces vivas, sistemas que resolvem problemas reais e automações que economizam
+              horas. Cada projeto é uma nova missão — e eu ainda estou só começando a explorar o universo.
+            </p>
+            <ul class="orbit__stats">
+              <li><strong class="js-counter" data-value="19">0</strong><span class="mono">anos em órbita</span></li>
+              <li><strong class="js-counter" data-value="10" data-suffix="+">0</strong><span class="mono">repositórios lançados</span></li>
+              <li><strong>∞</strong><span class="mono">curiosidade</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ============ 03 · CONSTELAÇÃO (skills) ============ -->
+        <section class="constellation" id="constellation" data-section="03 — CONSTELAÇÃO">
+          <div class="constellation__nebula" aria-hidden="true"></div>
+          <div class="constellation__head">
+            <p class="section-tag mono"><span>03</span> Constelação — Skills</p>
+            <h2 class="display constellation__title">Mapa estelar<br /><em>do meu stack</em></h2>
+          </div>
+          <div class="constellation__map">
+            <svg class="constellation__svg" viewBox="0 0 1200 700" role="img" aria-label="Constelação de tecnologias">
+              <g class="js-const-lines"></g>
+              <g class="js-const-stars"></g>
+            </svg>
+            <div class="constellation__tooltip mono" aria-hidden="true"></div>
+          </div>
+          <ul class="constellation__legend mono">
+            <li><i style="--c:#93c5fd"></i>Frontend</li>
+            <li><i style="--c:#60a5fa"></i>Backend &amp; Automação</li>
+            <li><i style="--c:#c7d2fe"></i>Ferramentas</li>
+          </ul>
+        </section>
+
+        <!-- ============ 04 · MISSÕES (projetos, horizontal) ============ -->
+        <section class="missions" id="missions" data-section="04 — MISSÕES">
+          <div class="missions__head">
+            <p class="section-tag mono"><span>04</span> Missões — Projetos</p>
+            <div class="missions__progress" aria-hidden="true"><span></span><i class="missions__rocket">▲</i></div>
+          </div>
+
+          <div class="missions__track">
+            <div class="missions__intro">
+              <h2 class="display">Diário<br />de <em>bordo</em></h2>
+              <p>Projetos que levei da ideia à órbita. Continue rolando — a nave segue de lado.</p>
+            </div>
+
+            <article class="mission" style="--p1:#60a5fa;--p2:#1e3a8a" data-cursor="Explorar">
+              <div class="mission__visual"><div class="mission__planet"></div><div class="mission__ring"></div></div>
+              <div class="mission__body">
+                <span class="mission__id mono">MISSÃO 001</span>
+                <h3 class="mission__title">Mesa Certa</h3>
+                <p>Protótipo de gerenciamento de mesas e pedidos para restaurantes, conectando o atendimento ao caixa e centralizando as informações.</p>
+                <ul class="mission__tags mono"><li>JavaScript</li><li>UX</li><li>Gestão</li></ul>
+                <a class="mission__link" href="https://github.com/dugonski/mesa-certa" target="_blank" rel="noopener">Ver repositório ↗</a>
+              </div>
+            </article>
+
+            <article class="mission" style="--p1:#a5b4fc;--p2:#312e81" data-cursor="Explorar">
+              <div class="mission__visual"><div class="mission__planet"></div><div class="mission__ring"></div></div>
+              <div class="mission__body">
+                <span class="mission__id mono">MISSÃO 002</span>
+                <h3 class="mission__title">Architecture Portfolio</h3>
+                <p>Portfólio imersivo para uma designer de interiores em Curitiba — o PDF tradicional transformado em uma experiência web.</p>
+                <ul class="mission__tags mono"><li>TypeScript</li><li>Motion</li><li>Web</li></ul>
+                <a class="mission__link" href="https://dugonski.github.io/architecture-portfolio/" target="_blank" rel="noopener">Ver ao vivo ↗</a>
+              </div>
+            </article>
+
+            <article class="mission" style="--p1:#7dd3fc;--p2:#0c4a6e" data-cursor="Explorar">
+              <div class="mission__visual"><div class="mission__planet"></div><div class="mission__ring"></div></div>
+              <div class="mission__body">
+                <span class="mission__id mono">MISSÃO 003</span>
+                <h3 class="mission__title">Clicker Game</h3>
+                <p>Jogo incremental simples, com loop de progressão, upgrades e economia balanceada para manter o jogador clicando.</p>
+                <ul class="mission__tags mono"><li>TypeScript</li><li>Game Loop</li></ul>
+                <a class="mission__link" href="https://github.com/dugonski/clicker-game" target="_blank" rel="noopener">Ver repositório ↗</a>
+              </div>
+            </article>
+
+            <article class="mission" style="--p1:#93c5fd;--p2:#172554" data-cursor="Explorar">
+              <div class="mission__visual"><div class="mission__planet"></div><div class="mission__ring"></div></div>
+              <div class="mission__body">
+                <span class="mission__id mono">MISSÃO 004</span>
+                <h3 class="mission__title">Encounter Detection</h3>
+                <p>Sistema de detecção de encontros: lógica de proximidade e eventos, pensada para ser previsível e testável.</p>
+                <ul class="mission__tags mono"><li>TypeScript</li><li>Algoritmos</li></ul>
+                <a class="mission__link" href="https://github.com/dugonski/encounter-detection" target="_blank" rel="noopener">Ver repositório ↗</a>
+              </div>
+            </article>
+
+            <article class="mission" style="--p1:#bae6fd;--p2:#1e40af" data-cursor="Explorar">
+              <div class="mission__visual"><div class="mission__planet"></div><div class="mission__ring"></div></div>
+              <div class="mission__body">
+                <span class="mission__id mono">MISSÃO 005</span>
+                <h3 class="mission__title">Horsch Terminal</h3>
+                <p>App de terminal em Python para executar macros de SAP GUI Scripting. Sem .exe, sem dependências — só produtividade.</p>
+                <ul class="mission__tags mono"><li>Python</li><li>SAP</li><li>Automação</li></ul>
+                <a class="mission__link" href="https://github.com/dugonski/horsch-terminal" target="_blank" rel="noopener">Ver repositório ↗</a>
+              </div>
+            </article>
+
+            <article class="mission mission--next" data-cursor="Contato">
+              <div class="mission__body">
+                <span class="mission__id mono">MISSÃO ???</span>
+                <h3 class="mission__title">A próxima<br />pode ser sua.</h3>
+                <a class="mission__link" href="#contact" data-scroll-to>Iniciar transmissão →</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============ 05 · TRAJETÓRIA (jornada) ============ -->
+        <section class="trajectory" id="trajectory" data-section="05 — TRAJETÓRIA">
+          <svg class="trajectory__svg" aria-hidden="true">
+            <path class="trajectory__ghost" />
+            <path id="trajPath" class="trajectory__path" />
+          </svg>
+          <div class="trajectory__rocket" aria-hidden="true">
+            <svg viewBox="0 0 40 64" width="34" height="54">
+              <path d="M20 2 C30 12 32 28 30 44 L10 44 C8 28 10 12 20 2Z" fill="#dbeafe" />
+              <circle cx="20" cy="22" r="5" fill="#1d4ed8" stroke="#93c5fd" stroke-width="2" />
+              <path d="M10 34 L2 48 L10 46Z M30 34 L38 48 L30 46Z" fill="#3b82f6" />
+              <path class="trajectory__flame" d="M13 46 Q20 66 27 46Z" fill="#7dd3fc" />
+            </svg>
+          </div>
+
+          <div class="trajectory__head">
+            <p class="section-tag mono"><span>05</span> Trajetória — Jornada</p>
+            <h2 class="display">Rota de<br /><em>voo</em></h2>
+          </div>
+
+          <ol class="trajectory__list">
+            <li class="checkpoint">
+              <span class="checkpoint__year mono">2024</span>
+              <h3>Ignição</h3>
+              <p>Primeiro commit no GitHub. Começa a curiosidade por como as coisas funcionam por trás da tela.</p>
+            </li>
+            <li class="checkpoint">
+              <span class="checkpoint__year mono">2024 — 2025</span>
+              <h3>Análise e Desenvolvimento de Sistemas</h3>
+              <p>Fundamentos de lógica, estruturas de dados, banco de dados e engenharia de software.</p>
+            </li>
+            <li class="checkpoint">
+              <span class="checkpoint__year mono">2025</span>
+              <h3>Automação no mundo real</h3>
+              <p>Ferramentas em Python para automatizar rotinas de SAP GUI — menos cliques repetitivos, mais tempo para pensar.</p>
+            </li>
+            <li class="checkpoint">
+              <span class="checkpoint__year mono">2025 — 2026</span>
+              <h3>Experiências web imersivas</h3>
+              <p>Portfólios e interfaces com motion design, TypeScript e GSAP — onde código encontra direção de arte.</p>
+            </li>
+            <li class="checkpoint">
+              <span class="checkpoint__year mono">AGORA</span>
+              <h3>Procurando a próxima missão</h3>
+              <p>Aberto a estágios, freelas e colaborações. Se tem um desafio, eu tenho combustível.</p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ============ 06 · BURACO NEGRO (contato) ============ -->
+        <section class="contact" id="contact" data-section="06 — HORIZONTE">
+          <div class="contact__stage">
+            <div class="blackhole" aria-hidden="true">
+              <div class="blackhole__disk"></div>
+              <div class="blackhole__disk blackhole__disk--b"></div>
+              <div class="blackhole__core"></div>
+              <div class="blackhole__lens"></div>
+            </div>
+            <div class="contact__content">
+              <p class="section-tag mono"><span>06</span> Horizonte de eventos — Contato</p>
+              <h2 class="contact__title display">
+                <span class="contact__line">Vamos criar algo</span>
+                <span class="contact__line"><em>fora deste mundo</em></span>
+              </h2>
+              <div class="contact__actions">
+                <a class="btn" href="https://github.com/dugonski" target="_blank" rel="noopener" data-magnetic data-cursor="Abrir">
+                  <span class="btn__fill"></span><span class="btn__text">Iniciar transmissão ↗</span>
+                </a>
+                <a class="btn btn--ghost" href="https://github.com/dugonski?tab=repositories" target="_blank" rel="noopener" data-magnetic>
+                  <span class="btn__fill"></span><span class="btn__text">Ver todos os repositórios</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee__row"><div class="marquee__inner">
+            <span>Disponível para novas missões</span><i>✦</i><span>Frontend</span><i>✦</i><span>Creative Dev</span><i>✦</i><span>Automação</span><i>✦</i>
+          </div></div>
+          <div class="marquee__row marquee__row--rev"><div class="marquee__inner">
+            <span>Curitiba — Brasil</span><i>✦</i><span>GSAP</span><i>✦</i><span>TypeScript</span><i>✦</i><span>Python</span><i>✦</i>
+          </div></div>
+        </div>
+
+        <footer class="footer">
+          <p class="mono">© <span class="js-year">2026</span> Guilherme Dugonski</p>
+          <p class="mono">Construído com GSAP na órbita de Curitiba</p>
+          <button class="footer__top mono" type="button" data-magnetic data-scroll-top>Voltar à base ↑</button>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/vendor/gsap/gsap.min.js"></script>
+  <script src="assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/gsap/ScrollSmoother.min.js"></script>
+  <script src="assets/vendor/gsap/SplitText.min.js"></script>
+  <script src="assets/vendor/gsap/ScrambleTextPlugin.min.js"></script>
+  <script src="assets/vendor/gsap/DrawSVGPlugin.min.js"></script>
+  <script src="assets/vendor/gsap/MotionPathPlugin.min.js"></script>
+  <script src="assets/vendor/gsap/CustomEase.min.js"></script>
+  <script src="assets/vendor/gsap/Observer.min.js"></script>
+  <script src="assets/vendor/gsap/ScrollToPlugin.min.js"></script>
+  <script src="assets/js/starfield.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
