@@ -3,6 +3,27 @@
    Paleta: azul-escuro profundo · azul elétrico · gelo
    ========================================================= */
 
+@font-face {
+  font-family: "Unbounded";
+  src: url("../fonts/unbounded.woff2") format("woff2");
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/space-grotesk.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
 :root {
   --void: #02040d;
   --abyss: #040a1c;
@@ -71,7 +92,9 @@ em { font-style: normal; color: var(--ice); }
 
 .display em {
   font-weight: 300;
-  -webkit-text-stroke: 1px var(--ice);
+  background: linear-gradient(100deg, var(--frost) 0%, var(--sky) 55%, var(--azure) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 
@@ -344,7 +367,7 @@ section { position: relative; }
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 0 var(--gutter);
+  padding: 110px var(--gutter) 120px;
 }
 
 .hero__inner { position: relative; z-index: 2; width: 100%; }
@@ -370,7 +393,7 @@ section { position: relative; }
   font-family: var(--f-display);
   font-weight: 900;
   text-transform: uppercase;
-  font-size: clamp(3rem, 13.2vw, 15rem);
+  font-size: clamp(2.4rem, 9.6vw, 11.5rem);
   line-height: 0.86;
   letter-spacing: -0.045em;
   will-change: transform;
@@ -380,11 +403,10 @@ section { position: relative; }
 
 .hero__line--outline {
   padding-left: 8vw;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ice);
+  font-weight: 300;
+  color: var(--sky);
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.45);
 }
-
-.hero__line--outline .char { -webkit-text-stroke: 1.5px var(--ice); }
 
 .hero__meta {
   display: flex;
@@ -394,7 +416,7 @@ section { position: relative; }
   margin-top: 5vh;
 }
 
-.hero__lead { max-width: 32ch; color: var(--muted); font-size: clamp(1rem, 1.3vw, 1.25rem); }
+.hero__lead { color: var(--muted); font-size: clamp(1rem, 1.3vw, 1.25rem); }
 
 .hero__scroll { display: flex; align-items: center; gap: 14px; color: var(--ice); }
 
@@ -888,6 +910,7 @@ section { position: relative; }
 .contact__title { font-size: clamp(2.2rem, 7.6vw, 8.5rem); }
 .contact__line { display: block; }
 .contact__line .char { display: inline-block; }
+.contact__title em { background: none; color: var(--sky); }
 
 .contact__actions {
   display: flex;
@@ -957,8 +980,7 @@ section { position: relative; }
 }
 
 .marquee__inner i { font-style: normal; color: var(--azure); font-size: 0.5em; }
-.marquee__row--rev .marquee__inner { color: transparent; -webkit-text-stroke: 1px var(--ice); }
-.marquee__row--rev .marquee__inner i { -webkit-text-stroke: 0; }
+.marquee__row--rev .marquee__inner { font-weight: 300; color: var(--sky); }
 
 .footer {
   display: flex;
@@ -987,6 +1009,7 @@ section { position: relative; }
   .hud { width: auto; right: var(--gutter); }
 
   .hero__meta { flex-direction: column; align-items: flex-start; }
+  .hero__title { font-size: 12.2vw; }
   .hero__line--outline { padding-left: 0; }
   .hero__countdown { display: none; }
 
