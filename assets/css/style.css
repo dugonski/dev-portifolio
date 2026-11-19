@@ -555,7 +555,7 @@ section { position: relative; }
 
 .constellation {
   min-height: 100vh;
-  padding: 14vh var(--gutter) 8vh;
+  padding: 11vh var(--gutter) 9vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   overflow: hidden;
@@ -584,9 +584,11 @@ section { position: relative; }
 .constellation__title { font-size: clamp(2.2rem, 5.5vw, 5.5rem); }
 
 .constellation__map { position: relative; width: 100%; max-width: 1300px; margin: 2vh auto 0; }
-.constellation__svg { width: 100%; height: auto; max-height: 64vh; overflow: visible; display: block; margin: 0 auto; }
+.constellation__svg { width: 100%; height: auto; max-height: 58vh; overflow: visible; display: block; margin: 0 auto; }
 
 .const-line { stroke: rgba(147, 197, 253, 0.4); stroke-width: 1; fill: none; }
+.const-line--bridge { stroke: rgba(125, 211, 252, 0.18); }
+.const-star:focus { outline: none; }
 
 .const-star { cursor: none; }
 .const-star__halo { fill: var(--c); opacity: 0.15; }
@@ -688,11 +690,12 @@ section { position: relative; }
   gap: 4vw;
   height: 100%;
   width: max-content;
-  padding: 18vh var(--gutter) 8vh;
+  padding: 20vh var(--gutter) 12vh;
   will-change: transform;
 }
 
 .missions__intro { width: min(36vw, 560px); flex-shrink: 0; }
+.missions__intro .display { font-size: clamp(2.6rem, 6vw, 6.5rem); }
 .missions__intro p { color: var(--muted); max-width: 34ch; margin-top: 2rem; }
 
 .mission {
@@ -907,7 +910,7 @@ section { position: relative; }
 .contact__content { position: relative; z-index: 2; text-align: center; }
 .contact__content .section-tag { justify-content: center; }
 
-.contact__title { font-size: clamp(2.2rem, 7.6vw, 8.5rem); }
+.contact__title { font-size: clamp(2rem, 6.2vw, 7.5rem); }
 .contact__line { display: block; }
 .contact__line .char { display: inline-block; }
 .contact__title em { background: none; color: var(--sky); }
@@ -1017,7 +1020,11 @@ section { position: relative; }
   .orbit__system { max-width: 340px; }
   .orbit__stats { margin-top: 2rem; }
 
-  .constellation__svg { max-height: none; }
+  .constellation__svg { max-height: 62vh; width: auto; max-width: 100%; }
+  .const-star__label { font-size: 26px; }
+  .const-group-label { font-size: 22px; }
+  .constellation__tooltip,
+  .constellation__legend { display: none; }
 
   .missions__head { top: 10vh; }
   .missions__track { gap: 6vw; padding-top: 16vh; }
