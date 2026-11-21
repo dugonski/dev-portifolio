@@ -7,8 +7,8 @@
 (function (GD) {
   const SKILLS = [
     {
-      name: "Frontend",
-      color: "#93c5fd",
+      name: "frontend/",
+      color: "#60a5fa",
       label: [110, 70],
       stars: [
         { n: "HTML", x: 140, y: 170, info: "Semântica e acessibilidade" },
@@ -21,8 +21,8 @@
       links: [[0, 1], [1, 2], [2, 3], [3, 0], [3, 4], [3, 5], [2, 5]],
     },
     {
-      name: "Backend & Automação",
-      color: "#60a5fa",
+      name: "backend/",
+      color: "#a5f3fc",
       label: [560, 60],
       stars: [
         { n: "Python", x: 610, y: 160, info: "Scripts, automação e CLIs" },
@@ -34,8 +34,8 @@
       links: [[0, 1], [1, 2], [0, 4], [1, 3], [2, 3]],
     },
     {
-      name: "Ferramentas",
-      color: "#c7d2fe",
+      name: "tools/",
+      color: "#c4b5fd",
       label: [930, 300],
       stars: [
         { n: "Git", x: 960, y: 420, info: "Commits convencionais e branches" },
@@ -75,6 +75,7 @@
       const lp = P(group.label[0], group.label[1]);
       const title = el("text", { x: portrait ? lp.x - 20 : lp.x, y: portrait ? lp.y - 40 : lp.y, class: "const-group-label" });
       title.textContent = group.name;
+      title.style.fill = group.color;
       starsG.appendChild(title);
       g.title = title;
 
@@ -125,7 +126,11 @@
     const tip = GD.q(".constellation__tooltip");
 
     const show = (star) => {
-      tip.innerHTML = `<strong>${star.dataset.name}</strong><br><span style="color:var(--muted)">${star.dataset.info}</span>`;
+      tip.innerHTML =
+        `<span class="c-punc">{</span><br>` +
+        `&nbsp;&nbsp;<span class="c-prop">skill</span><span class="c-punc">:</span> <span class="c-str">"${star.dataset.name}"</span><span class="c-punc">,</span><br>` +
+        `&nbsp;&nbsp;<span class="c-prop">uso</span><span class="c-punc">:</span> <span class="c-str">"${star.dataset.info}"</span><br>` +
+        `<span class="c-punc">}</span>`;
       const r = star.getBoundingClientRect();
       const m = map.getBoundingClientRect();
       gsap.set(tip, { x: r.left - m.left + 24, y: r.top - m.top + 18 });
@@ -177,8 +182,6 @@
         scrollTrigger: { trigger: "#constellation", start: "top top", end: "+=170%", pin: true, scrub: 1 },
       });
 
-      tl.fromTo(".constellation__nebula", { scale: 0.8, rotation: -8 }, { scale: 1.2, rotation: 8, duration: 4, ease: "none" }, 0);
-
       gsap.fromTo(".constellation__title",
         { autoAlpha: 0, y: 80, clipPath: "inset(0% 0% 100% 0%)" },
         {
@@ -196,8 +199,7 @@
         });
       });
 
-      tl.fromTo(bridges, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.6, stagger: 0.15, ease: "none" }, ">-0.2")
-        .fromTo(".constellation__legend li", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, stagger: 0.1, duration: 0.3 }, "<");
+      tl.fromTo(bridges, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.6, stagger: 0.15, ease: "none" }, ">-0.2");
     },
   };
 })(window.GD);
