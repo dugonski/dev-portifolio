@@ -51,9 +51,11 @@
         .fromTo(split.chars,
           { x: (i, c) => toCenter(c, "x"), y: (i, c) => toCenter(c, "y"), scale: 0, rotation: () => gsap.utils.random(-180, 180), autoAlpha: 0 },
           { x: 0, y: 0, scale: 1, rotation: 0, autoAlpha: 1, duration: 1, ease: "power3.out", stagger: { each: 0.025, from: "center" } }, 0.25)
-        .fromTo(".contact__content .section-tag, .contact__actions",
+        .fromTo(".contact__content .section-tag, .terminal",
           { autoAlpha: 0, y: 30 },
-          { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.15 }, ">-0.3")
+          { autoAlpha: 1, y: 0, duration: 0.3, stagger: 0.1 }, ">-0.3")
+        .fromTo(".js-term", { text: "" }, { text: GD.q(".js-term").dataset.text, duration: 0.7, ease: "none" }, ">")
+        .fromTo(".contact__actions", { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.3 }, ">")
         .to(".blackhole", { scale: 1.15, duration: 0.6, ease: "none" }, ">");
 
       marquee();
