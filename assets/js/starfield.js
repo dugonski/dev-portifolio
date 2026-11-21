@@ -11,7 +11,7 @@
   const state = { warp: 0, boost: 0, mx: 0, my: 0, tx: 0, ty: 0 };
   GD.starfield = state;
 
-  const COLORS = ["238,244,255", "238,244,255", "219,234,254", "147,197,253", "125,211,252"];
+  const COLORS = ["230,237,247", "230,237,247", "190,210,240", "96,165,250"];
   let w = 0, h = 0, stars = [];
 
   const makeStar = (z = Math.random()) => ({
@@ -29,7 +29,7 @@
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = Math.round(Math.min(1100, Math.max(350, (w * h) / 1500)));
+    const count = Math.round(Math.min(650, Math.max(220, (w * h) / 2600)));
     stars = Array.from({ length: count }, () => makeStar());
   };
 
@@ -42,7 +42,7 @@
     const speed = base + state.warp * 0.018 + state.boost;
     const streak = speed > 0.0025;
 
-    ctx.fillStyle = `rgba(2, 4, 13, ${streak ? 0.55 : 1})`;
+    ctx.fillStyle = `rgba(3, 7, 18, ${streak ? 0.55 : 1})`;
     ctx.fillRect(0, 0, w, h);
 
     const cx = w / 2 - state.mx * 60;
@@ -60,8 +60,8 @@
       if (sx < -50 || sx > w + 50 || sy < -50 || sy > h + 50) { stars[i] = makeStar(1); continue; }
 
       const depth = 1 - s.z;
-      const alpha = Math.min(1, depth * 1.5);
-      const r = s.size * depth * 1.7 + 0.15;
+      const alpha = Math.min(0.85, depth * 1.2);
+      const r = s.size * depth * 1.3 + 0.1;
 
       if (streak) {
         const px = cx + (s.x / pz) * fov;
