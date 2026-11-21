@@ -32,6 +32,20 @@
     }
 
     GD.qa("path", svg).forEach((p) => p.setAttribute("d", d));
+
+    // um "commit" (nó) em cada checkpoint, como no git log --graph
+    const nodesG = GD.q(".js-traj-nodes");
+    pts.slice(1, -1).forEach(([x, y], i) => {
+      let node = nodesG.children[i];
+      if (!node) {
+        node = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        node.setAttribute("r", 6);
+        node.setAttribute("class", "traj-node");
+        nodesG.appendChild(node);
+      }
+      node.setAttribute("cx", x);
+      node.setAttribute("cy", y);
+    });
   };
 
   GD.scenes.trajectory = {
@@ -55,7 +69,8 @@
         }, 0);
 
       GD.qa(".checkpoint").forEach((item, i) => {
-        const year = item.querySelector(".checkpoint__year");
+        const year = item.querySelector(".commit__hash");
+        const node = GD.q(".js-traj-nodes").children[i];
         const text = year.textContent;
         gsap.timeline({
           scrollTrigger: { trigger: item, start: "top 78%", toggleActions: "play none none reverse" },
@@ -63,7 +78,8 @@
           .fromTo(item,
             { autoAlpha: 0, x: i % 2 ? 80 : -80, rotation: i % 2 ? 3 : -3 },
             { autoAlpha: 1, x: 0, rotation: 0, duration: 1.1, ease: "gd.out" })
-          .to(year, { duration: 0.8, scrambleText: { text, chars: "0123456789", speed: 0.6 } }, 0.15);
+          .fromTo(node, { attr: { r: 0 } }, { attr: { r: 6 }, duration: 0.6, ease: "back.out(3)" }, 0)
+          .to(year, { duration: 0.8, scrambleText: { text, chars: "0123456789abcdef", speed: 0.6 } }, 0.15);
       });
     },
   };

@@ -9,6 +9,7 @@ window.GD = window.GD || {};
     ScrollSmoother,
     SplitText,
     ScrambleTextPlugin,
+    TextPlugin,
     DrawSVGPlugin,
     MotionPathPlugin,
     CustomEase,
@@ -66,7 +67,7 @@ window.GD = window.GD || {};
 
     GD.qa("[data-scramble]").forEach((el) => {
       const text = el.textContent;
-      el.addEventListener("mouseenter", () => {
+      el.parentElement.addEventListener("mouseenter", () => {
         gsap.to(el, {
           duration: 0.7,
           overwrite: true,
@@ -112,6 +113,10 @@ window.GD = window.GD || {};
     document.addEventListener("pointerup", () => gsap.to(ring, { scale: 1, duration: 0.4, ease: "elastic.out(1,0.4)" }));
   };
 
+  /* ---------- Digitação estilo terminal ---------- */
+  GD.type = (el, text, opts = {}) =>
+    gsap.fromTo(el, { text: "" }, { text, duration: text.length * 0.045, ease: "none", ...opts });
+
   /* ---------- Botões magnéticos ---------- */
   GD.initMagnetic = () => {
     if (GD.touch) return;
@@ -144,7 +149,7 @@ window.GD = window.GD || {};
         gsap.set(bar, { scaleX: self.progress });
 
         const v = Math.abs(self.getVelocity());
-        if (vel) vel.textContent = String(Math.min(9999, Math.round(v * 1.8))).padStart(4, "0");
+        if (vel) vel.textContent = Math.min(9999, Math.round(v * 1.8));
         if (GD.starfield) GD.starfield.boost = Math.min(0.035, v / 110000);
       },
     });
@@ -152,7 +157,7 @@ window.GD = window.GD || {};
     ScrollTrigger.create({
       trigger: ".marquee",
       start: "top 85%",
-      onToggle: (self) => gsap.to(".hud", { autoAlpha: self.isActive ? 0 : 1, duration: 0.4 }),
+      onToggle: (self) => gsap.to(".statusbar", { autoAlpha: self.isActive ? 0 : 1, duration: 0.4 }),
     });
 
     const links = GD.qa(".nav__links a");
@@ -164,7 +169,7 @@ window.GD = window.GD || {};
         end: "bottom center",
         onToggle: (self) => {
           if (!self.isActive) return;
-          gsap.to(sec, { duration: 0.8, overwrite: true, scrambleText: { text: section.dataset.section, chars: "01#/<>" } });
+          gsap.to(sec, { duration: 0.6, overwrite: true, scrambleText: { text: section.dataset.section, chars: "lowerCase", speed: 0.6 } });
           links.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + section.id));
         },
       });
