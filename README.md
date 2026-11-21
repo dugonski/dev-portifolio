@@ -10,15 +10,15 @@ Cada seção é uma etapa da missão, com uma interação de scroll própria:
 
 | # | Seção | Experiência | Plugins |
 |---|-------|-------------|---------|
-| 00 | Preloader | Contagem regressiva de lançamento que se abre em cortina | `CustomEase` |
-| 01 | Lançamento | Título se desfaz, planeta fica para trás e o campo de estrelas entra em dobra | `ScrollTrigger` (pin + scrub), `SplitText` |
-| 02 | Órbita | Anéis desenhados pela rolagem, satélite em órbita e texto revelado palavra por palavra | `DrawSVGPlugin`, `MotionPathPlugin`, `SplitText` |
-| 03 | Constelação | O stack vira um mapa estelar: linhas traçadas e nomes decodificados | `DrawSVGPlugin`, `ScrambleTextPlugin` |
-| 04 | Missões | Rolagem vertical vira viagem horizontal pelos projetos | `ScrollTrigger` (`containerAnimation`) |
-| 05 | Trajetória | Foguete percorre uma rota calculada a partir dos checkpoints | `MotionPathPlugin`, `DrawSVGPlugin` |
-| 06 | Horizonte | Letras emergem de um buraco negro; marquee reage à velocidade do scroll | `SplitText`, `Observer` |
+| — | Preloader | Boot log de terminal com contagem até a ignição | `CustomEase` |
+| 00 | Lançamento | `whoami` digitado, título se desfaz e o campo de estrelas entra em dobra | `ScrollTrigger` (pin + scrub), `SplitText`, `TextPlugin` |
+| 01 | Sobre | Editor `about.ts` digitado linha a linha pela rolagem | `ScrollTrigger`, `SplitText` |
+| 02 | Skills | O stack vira um mapa estelar; tooltip em formato JSON | `DrawSVGPlugin`, `ScrambleTextPlugin` |
+| 03 | Projetos | Scroll horizontal por cards em formato de repositório, com `git clone` copiável | `ScrollTrigger` (`containerAnimation`) |
+| 04 | Jornada | `git log --graph`: foguete percorre a rota passando pelos commits | `MotionPathPlugin`, `DrawSVGPlugin` |
+| 05 | Contato | Letras emergem de um buraco negro e um `git commit` é digitado no terminal | `SplitText`, `TextPlugin`, `Observer` |
 
-Global: `ScrollSmoother` (smooth scroll), `ScrollToPlugin`, cursor customizado, botões magnéticos, HUD com a distância percorrida até a Lua e campo de estrelas em canvas que acelera com a velocidade da rolagem.
+Global: `ScrollSmoother` (smooth scroll), `ScrollToPlugin`, cursor customizado, botões magnéticos, status bar estilo editor (branch, arquivo da seção atual e distância percorrida até a Lua) e campo de estrelas em canvas que acelera com a velocidade da rolagem.
 
 Respeita `prefers-reduced-motion` e tem layouts específicos para mobile.
 
@@ -54,7 +54,8 @@ Abra http://localhost:8000.
 
 ## Editando o conteúdo
 
-- **Textos, projetos e jornada:** `index.html`
+- **Textos, código do editor, projetos e jornada:** `index.html`
+- **Boot log do preloader:** array `BOOT` em `assets/js/main.js`
 - **Skills da constelação:** array `SKILLS` em `assets/js/scenes/constellation.js`
 - **Cores:** variáveis em `:root` no topo de `assets/css/style.css`
 
